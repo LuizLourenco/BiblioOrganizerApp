@@ -1,0 +1,170 @@
+erDiagram
+    USUARIO }|..|{ ENDERECO : possui
+    USUARIO ||--o{ EMPRESTIMO : realiza
+    USUARIO ||--o{ RESERVA : faz
+    ACERVO ||--|{ EXEMPLAR : contem
+    ACERVO ||--|{ AUTORIA : "escrito por"
+
+
+    ACERVO ||--o{ EMPRESTIMO : "emprestado em"
+    ACERVO ||--o{ RESERVA : "reservado em"
+
+    AUTOR ||--o{ AUTORIA : "autor de"
+
+    EXEMPLAR ||--o{ EMPRESTIMO : "utilizado em"
+    CATEGORIA ||--|{ ACERVO : classifica
+    EDITORA ||--o{ ACERVO : publica
+    EMPRESTIMO ||--|{ MULTA : pode_gerar
+    USUARIO ||--o{ MULTA : possui
+
+    USUARIO {
+        int id
+        string nome
+        string email
+        string telefone
+        string docIdentificacao
+        string tipoDoc
+        string senha
+        string tipoUsuario
+        string atividadesParticipadas
+        date dataNascimento
+        date dataCadastro
+        date dataAtualizacao
+        boolean ativo
+    }
+
+    ENDERECO {
+        int id
+        int usuarioId
+        string logradouro
+        string cidade
+        string estado
+        string cep
+    }
+
+    ACERVO {
+        int id
+        string titulo
+        int categoriaId
+        string tipoAquisicao
+        data dateAquisicao
+        data dataCadastro
+        data dataAtualizacao
+        data dataRemocao
+        boolean ativo
+    }
+
+    LIVRO {
+        int id
+        int acervoId
+        string tombo
+        int principalAutorId
+        int secundarioAutorId
+        string subtitulo
+        string isbn
+        int editoraId
+        int edicao
+        int anoPublicacao
+        int numeroPaginas
+        string idioma
+        string resumo
+        string palavrasChave
+        string formato
+        string dimensoes
+        string peso
+        string capa
+        string disponibilidade
+        string localizacao
+        string tipoMaterial
+        string publicoAlvo
+        string classificacaoIndicativa
+        string status
+    }
+
+
+    PERIODICO {
+        int id
+        int acervoId
+        string issn
+        string volume
+        string numero
+        date dataPublicacao
+        string tipoMaterial
+        string disponibilidade
+        string localizacao
+        string publicoAlvo
+        string classificacaoIndicativa
+        string status
+    }
+
+
+    TipoUsuario {
+        string ALUNO
+        string PROFESSOR
+        string FUNCIONARIO
+        string EXTERNO
+    }
+
+
+
+    EXEMPLAR {
+        int id
+        int livroId
+        int codigoExemplar
+        boolean disponivel
+    }
+
+    AUTOR {
+        int id
+        string nome
+        string nacionalidade
+    }
+
+    AUTORIA {
+        int livroId
+        string autorId
+    }
+
+    EMPRESTIMO {
+        int id
+        int usuarioId
+        int exemplarId
+        date dataEmprestimo
+        date dataDevolucaoPrevista
+        date dataDevolucaoReal
+        string status
+    }
+
+    RESERVA {
+        int id
+        string usuarioId
+        string livroId
+        date dataReserva
+        date dataExpiracao
+        string status
+    }
+
+    MULTA {
+        int id
+        int usuarioId
+        int emprestimoId
+        decimal valor
+        date dataGeracao
+        date dataPagamento
+        string status
+    }
+
+    CATEGORIA {
+        int id
+        string nome
+        string descricao
+    }
+
+    EDITORA {
+        int id
+        string nome
+        string cidade
+    }
+
+
+
